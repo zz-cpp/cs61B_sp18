@@ -43,13 +43,21 @@ public class ArrayDeque<T> {
         T a [] = (T[]) new Object[capital];
 
         int begin = addOne(nextFirst,Item.length);
-        int length = Item.length - begin;
-        System.arraycopy(Item,begin ,a,0,length);
-        System.arraycopy(Item,0 ,a, length,nextLast);
+        if(nextFirst > nextLast){
+            int length = Item.length - begin;
+            System.arraycopy(Item,begin ,a,0,length);
+            System.arraycopy(Item,0 ,a, length,nextLast);
+            nextFirst = a.length -1;
+            nextLast = nextLast + length;
 
-        nextFirst = a.length -1;
-        nextLast = nextLast + length;
+        } else {
+            int length = size;
+            System.arraycopy(Item,begin,a,0,length);
+            nextFirst = a.length - 1;
+            nextLast = length;
+        }
         Item = a;
+
     }
 
     public void addFirst(T item){
@@ -86,7 +94,7 @@ public class ArrayDeque<T> {
         Item[nextFirst] = null;
         size--;
 
-        if(useeRate() <= 0.25){
+        if(useeRate() <= 0.25 && Item.length > 8){
             resize(Item.length / 2);
         }
 
@@ -99,7 +107,7 @@ public class ArrayDeque<T> {
         Item[nextLast] = null;
         size--;
 
-        if(useeRate() <= 0.25){
+        if(useeRate() <= 0.25 && Item.length > 8){
             resize(Item.length / 2);
         }
 
@@ -124,7 +132,20 @@ public class ArrayDeque<T> {
         return Item[index];
     }
 
-    public T[] getItem(){
+    private T[] getItem(){
         return Item;
+    }
+
+    public void printDeque(){
+
+        int begin = addOne(nextFirst,Item.length);;
+
+        for (int i = 0; i < size ; i++) {
+            System.out.print(Item[begin] + " ");
+            begin = addOne(begin,Item.length);
+        }
+
+
+
     }
 }
