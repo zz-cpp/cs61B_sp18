@@ -1,13 +1,13 @@
-public class ArrayDeque<Glorp> {
+public class ArrayDeque<T> {
 
-    public Glorp[] Item;
+    private T[] Item;
     private int size;
     private int nextFirst;
     private int nextLast;
 
     public ArrayDeque() {
         size = 0;
-        Item = (Glorp[]) new Object[8];
+        Item = (T[]) new Object[8];
         nextFirst = -2;
         nextLast = -2;
     }
@@ -15,7 +15,7 @@ public class ArrayDeque<Glorp> {
     public ArrayDeque(ArrayDeque other){
         Object[]a = new Object[other.Item.length];
         System.arraycopy(other.Item, 0, a, 0, other.Item.length);
-        Item = (Glorp[]) a;
+        Item = (T[]) a;
         nextLast = other.nextLast;
         nextFirst = other.nextLast;
         size = other.size;
@@ -40,7 +40,7 @@ public class ArrayDeque<Glorp> {
     }
 
     private void resize(int capital){
-        Glorp a [] = (Glorp[]) new Object[capital];
+        T a [] = (T[]) new Object[capital];
 
         int begin = addOne(nextFirst,Item.length);
         int length = Item.length - begin;
@@ -52,7 +52,7 @@ public class ArrayDeque<Glorp> {
         Item = a;
     }
 
-    public void addFirst(Glorp item){
+    public void addFirst(T item){
         if(nextFirst == -2 && nextLast == -2){
             nextFirst = 0;
             nextLast = 1;
@@ -66,7 +66,7 @@ public class ArrayDeque<Glorp> {
         size++;
     }
 
-    public void addLast(Glorp item) {
+    public void addLast(T item) {
         if(nextFirst == -2 && nextLast == -2){
             nextFirst = Item.length - 1;
             nextLast = 0;
@@ -80,9 +80,9 @@ public class ArrayDeque<Glorp> {
         size++;
     }
 
-    public Glorp removeFirst(){
+    public T removeFirst(){
         nextFirst = addOne(nextFirst,Item.length);
-        Glorp first = Item[nextFirst];
+        T first = Item[nextFirst];
         Item[nextFirst] = null;
         size--;
 
@@ -93,9 +93,9 @@ public class ArrayDeque<Glorp> {
         return first;
     }
 
-    public Glorp removeLast(){
+    public T removeLast(){
         nextLast = minusOne(nextLast,Item.length);
-        Glorp last = Item[nextLast];
+        T last = Item[nextLast];
         Item[nextLast] = null;
         size--;
 
@@ -117,10 +117,14 @@ public class ArrayDeque<Glorp> {
         return size;
     }
 
-    public Glorp get(int index){
+    public T get(int index){
         if(Item[index] == null){
             return null;
         }
         return Item[index];
+    }
+
+    public T[] getItem(){
+        return Item;
     }
 }

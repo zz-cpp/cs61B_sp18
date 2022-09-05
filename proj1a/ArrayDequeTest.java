@@ -28,7 +28,7 @@ public class ArrayDequeTest {
             }
         }
 
-        assertArrayEquals(pretend, test.Item);
+        assertArrayEquals(pretend, test.getItem());
 
         test.removeFirst();
         test.removeFirst();
@@ -38,7 +38,7 @@ public class ArrayDequeTest {
         pretend[4] = null;
         pretend[5] = null;
 
-        assertArrayEquals(pretend,test.Item);
+        assertArrayEquals(pretend,test.getItem());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ArrayDequeTest {
         }
 
         test.addLast(5);
-        assertArrayEquals(pretend,test.Item);
+        assertArrayEquals(pretend,test.getItem());
     }
 
     @Test
@@ -98,7 +98,7 @@ public class ArrayDequeTest {
             test.addLast(i);
         }
 
-        assertArrayEquals(pretend, test.Item);
+        assertArrayEquals(pretend, test.getItem());
     }
 
 }
