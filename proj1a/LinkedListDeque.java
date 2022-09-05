@@ -1,10 +1,10 @@
 
 public class LinkedListDeque<T> {
 
-    private  class Node{
-        Node prev;
-        T item;
-        Node next;
+    private class Node {
+        private Node prev;
+        private T item;
+        private Node next;
 
         private Node(Node prev, T item, Node next ) {
             this.prev = prev;
@@ -25,19 +25,18 @@ public class LinkedListDeque<T> {
         }
     }
 
-    private class DoublyLinkedList{
 
         private Node sentinel;
         int size;
 
-        private DoublyLinkedList(){
+        public LinkedListDeque(){
             sentinel = new Node();
             sentinel.next = sentinel;
             sentinel.prev = sentinel;
             size = 0;
         }
 
-        private DoublyLinkedList(T item){
+        public LinkedListDeque(T item){
             sentinel = new Node();
             Node firstItem = new Node(item);
             sentinel.next = firstItem;
@@ -47,7 +46,7 @@ public class LinkedListDeque<T> {
             size = 1;
         }
 
-        private void addLast(T x){
+        public void addLast(T x){
             Node newObj = new Node(x);
             sentinel.prev.next = newObj;
             newObj.prev = sentinel.prev;
@@ -56,7 +55,7 @@ public class LinkedListDeque<T> {
             size++;
         }
 
-        private void addFirst(T x){
+        public void addFirst(T x){
             Node newObj = new Node(x);
             newObj.next = sentinel.next;
             newObj.prev = sentinel;
@@ -65,7 +64,7 @@ public class LinkedListDeque<T> {
             size++;
         }
 
-        private boolean isEmpty() {
+        public boolean isEmpty() {
             if(size == 0){
                 return true;
             }
@@ -76,7 +75,7 @@ public class LinkedListDeque<T> {
             return size;
         }
 
-        public void printDList(){
+        public void printDeque(){
             Node item = sentinel.next;
             while(item != null && item != sentinel){
                 System.out.print(item.item + " ");
@@ -140,42 +139,9 @@ public class LinkedListDeque<T> {
         }
     }
 
-    private DoublyLinkedList sentinel;
 
 
-    public LinkedListDeque() {
-        sentinel = new DoublyLinkedList();
-    }
 
-    public void addFirst(T item){
-        sentinel.addFirst(item);
-    }
 
-    public void addLast(T item){
-        sentinel.addLast(item);
-    }
 
-    public boolean isEmpty(){
-        return sentinel.isEmpty();
-    }
 
-    public int size(){
-        return sentinel.size();
-    }
-
-    public void printDeque(){
-         sentinel.printDList();
-    }
-
-    public T removeFirst(){
-      return   sentinel.removeFirst();
-    }
-
-    public T removeLast(){
-        return sentinel.removeLast();
-    }
-
-    public T get(int index){
-        return sentinel.get(index);
-    }
-}
