@@ -12,14 +12,6 @@ public class ArrayDeque<T> {
         nextLast = 0;
     }
 
-    public ArrayDeque(ArrayDeque other){
-        Object[]a = new Object[other.Item.length];
-        System.arraycopy(other.Item, 0, a, 0, other.Item.length);
-        Item = (T[]) a;
-        nextLast = other.nextLast;
-        nextFirst = other.nextLast;
-        size = other.size;
-    }
 
     private double useeRate(){
         return (double) size / Item.length;
