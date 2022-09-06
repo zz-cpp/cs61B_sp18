@@ -1,8 +1,6 @@
-import javafx.scene.Node;
-
 public class LinkedListDeque<T> {
 
-    private class Node {
+    public class Node {
         private Node prev;
         private T item;
         private Node next;

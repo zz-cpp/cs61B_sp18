@@ -1,4 +1,4 @@
-import java.util.ArrayDeque;
+import static org.junit.Assert.assertEquals;
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
@@ -76,20 +76,45 @@ public class LinkedListDequeTest {
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
 		lld1.addFirst(10);
-		// should not be empty 
+		// should not be empty
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
 		lld1.removeFirst();
-		// should be empty 
+		// should be empty
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
 
 		printTestStatus(passed);
 
 	}
 
+
+	public static void testRecursive (){
+		System.out.println("Running add/remove test.");
+
+		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		// should be empty
+		boolean passed = checkEmpty(true, lld1.isEmpty());
+
+		lld1.addFirst(10);
+		lld1.addFirst(11);
+		lld1.addFirst(12);
+		lld1.addFirst(13);
+		lld1.addFirst(14);
+		lld1.addFirst(15);
+
+		int result = lld1.getRecursive(3);
+		assertEquals(12,result);
+
+	}
+
+
+
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		addIsEmptySizeTest();
 		addRemoveTest();
+		testRecursive();
 	}
 } 
