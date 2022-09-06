@@ -1,6 +1,6 @@
 public class LinkedListDeque<T> {
 
-    public class Node {
+    private class Node {
         private Node prev;
         private T item;
         private Node next;
@@ -35,7 +35,7 @@ public class LinkedListDeque<T> {
             size = 0;
         }
 
-        public LinkedListDeque(T item){
+     /*   public LinkedListDeque(T item){
             sentinel = new Node();
             Node firstItem = new Node(item);
             sentinel.next = firstItem;
@@ -43,7 +43,7 @@ public class LinkedListDeque<T> {
             firstItem.next = sentinel;
             sentinel.prev = firstItem;
             size = 1;
-        }
+        }*/
 
         public void addLast(T x){
             Node newObj = new Node(x);
@@ -102,12 +102,12 @@ public class LinkedListDeque<T> {
             if(sentinel.prev == sentinel ){
                 return null;
             }
-
             Node last = sentinel.prev;
             last.prev.next = sentinel;
             sentinel.prev = last.prev;
             last.next = null;
             last.prev = null;
+            size--;
 
             return last.item;
         }
@@ -134,7 +134,7 @@ public class LinkedListDeque<T> {
         return getRecurHelp(index,sentinel.next);
     }
 
-    public T getRecurHelp(int index, Node node){
+    private T getRecurHelp(int index, Node node){
             if(index > size || node == sentinel) {
                 return null;
             }
@@ -144,7 +144,7 @@ public class LinkedListDeque<T> {
 
             return getRecurHelp(index -1 ,node.next);
     }
-    }
+}
 
 
 
