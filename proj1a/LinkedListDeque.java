@@ -1,3 +1,4 @@
+import javafx.scene.Node;
 
 public class LinkedListDeque<T> {
 
@@ -114,29 +115,37 @@ public class LinkedListDeque<T> {
         }
 
         public T get(int index){
-
             if(index == size - 1){
                 return sentinel.prev.item;
             }
-
             if(index == 0){
                 return sentinel.next.item;
             }
-
             Node head = sentinel.next;
-
             while(index > 0){
-
                 if(head == sentinel){
                     return null;
                 }
-
                 head = head.next;
                 index--;
             }
-
             return head.item;
         }
+
+    public T getRecursive(int index){
+        return getRecurHelp(index,sentinel.next);
+    }
+
+    public T getRecurHelp(int index, Node node){
+            if(index > size || node == sentinel) {
+                return null;
+            }
+            if(index == 0 ){
+                return node.item;
+            }
+
+            return getRecurHelp(index -1 ,node.next);
+    }
     }
 
 

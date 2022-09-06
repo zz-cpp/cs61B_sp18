@@ -154,8 +154,6 @@ public class ArrayDeque<T> {
             System.out.print(Item[begin] + " ");
             begin = addOne(begin,Item.length);
         }
-
-
-
     }
+
 }
