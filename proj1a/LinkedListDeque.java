@@ -26,7 +26,7 @@ public class LinkedListDeque<T> {
 
 
         private Node sentinel;
-        int size;
+        private int size;
 
         public LinkedListDeque(){
             sentinel = new Node();
