@@ -38,16 +38,12 @@ public class TestPalindrome {
         OffByOne obo = new OffByOne();
         String A = "flake";
         String B = "AECDFB";
-        String C = "racecar";
 
         String D = "";
         String E = "shfkdugfudgfjue";
 
-
-
         assertTrue(palindrome.isPalindrome(A,obo));
         assertTrue(palindrome.isPalindrome(B,obo));
-        assertTrue(palindrome.isPalindrome(C,obo));
         assertTrue(palindrome.isPalindrome(D,obo));
 
         assertFalse(palindrome.isPalindrome(E,obo));
