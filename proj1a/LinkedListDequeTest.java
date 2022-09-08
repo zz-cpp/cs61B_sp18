@@ -1,4 +1,6 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import org.junit.Test;
+import static  org.junit.Assert.*;
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
@@ -106,6 +108,26 @@ public class LinkedListDequeTest {
 
 		int result = lld1.getRecursive(3);
 		assertEquals(12,result);
+
+	}
+
+	@Test
+	public void testAddRemoveIsEmpty(){
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		lld1.addFirst(0);
+		lld1.removeLast();
+		boolean res = lld1.isEmpty();
+		assertEquals(res,true);
+	}
+
+	@Test
+	public void testAddGet(){
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		lld1.addFirst(0);
+		lld1.addLast(1);
+		lld1.addFirst(2);
+		int res = lld1.get(0);
+		assertEquals(res,2);
 
 	}
 
