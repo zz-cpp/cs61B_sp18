@@ -67,7 +67,7 @@ public class Palindrome {
         Character left  = words.removeFirst();
         Character right = words.removeLast();
 
-        if (!left.equals(right) && !cc.equalChars(left, right)) {
+        if (!cc.equalChars(left, right)) {
             return false;
         }
 
