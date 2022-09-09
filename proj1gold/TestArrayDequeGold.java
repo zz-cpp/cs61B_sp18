@@ -60,7 +60,7 @@ public class TestArrayDequeGold {
                 case 2: {
                     act = sd.removeFirst();
                     exp = solve.removeFirst();
-                    message += "removeFirst(): " + act + "\n";
+                    message += "removeFirst()\n";
                     assertEquals(message, exp, act);
                 }
                 break;
@@ -68,7 +68,7 @@ public class TestArrayDequeGold {
                 case 3: {
                     act = sd.removeLast();
                     exp = solve.removeLast();
-                    message += "removeLast(): " + act + "\n";
+                    message += "removeLast()\n";
                     assertEquals(message, exp, act);
                 }
                 default:
