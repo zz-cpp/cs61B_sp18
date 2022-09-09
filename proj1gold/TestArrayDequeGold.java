@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -9,105 +10,72 @@ public class TestArrayDequeGold {
 
     @Test
     public void testFirst() {
-        StudentArrayDeque<Integer> sd = new StudentArrayDeque();
-        LinkedList<Integer> solve = new ArrayDequeSolution();
         String message = "\n";
         boolean actBoolean;
         boolean expBoolean;
         Integer act;
         Integer exp;
 
-        double numberBetweenZeroAndOne;
-        for (int i = 0; i < 20; i++) {
-            numberBetweenZeroAndOne = StdRandom.uniform();
+        int operation1;
+        int operation2;
+        int randomNum;
 
-            if (numberBetweenZeroAndOne < 0.5) {
-                sd.addFirst(i);
-                solve.addFirst(i);
-                message += "addFirst(" + i + ")" + "\n";
+        for (int j = 0; j < 1000; j++) {
+            StudentArrayDeque<Integer> sd = new StudentArrayDeque();
+            LinkedList<Integer> solve = new ArrayDequeSolution();
 
-                actBoolean = solve.isEmpty();
-                expBoolean = solve.isEmpty();
-                if (Boolean.compare(actBoolean, expBoolean) != 0) {
-                    message += "isEmpty() " + actBoolean + "\n";
+            for (int i = 0; i < 1000; i++) {
+                operation1 = StdRandom.uniform(0, 2);
+                randomNum = StdRandom.uniform(0, 100);
+                if (operation1 == 1) {
+                    sd.addFirst(randomNum);
+                    solve.addFirst(randomNum);
+                    message += "addFirst(" + randomNum + ")" + "\n";
+                } else {
+                    sd.addLast(randomNum);
+                    solve.addLast(randomNum);
+                    message += "addLast(" + randomNum + ")\n";
                 }
-                assertEquals(expBoolean, actBoolean);
 
-                act = sd.size();
-                exp = solve.size();
-                if (!act.equals(exp)) {
-                    message += "size() " + act + "\n";
+                operation2 = StdRandom.uniform(0, 4);
+                switch (operation2) {
+                    case 0: {
+                        actBoolean = sd.isEmpty();
+                        expBoolean = solve.isEmpty();
+                        if (actBoolean != expBoolean) {
+                            message += "isEmpty() " + actBoolean + "\n";
+                        }
+                        assertEquals(expBoolean, actBoolean);
+                    }
+                    break;
+
+                    case 1: {
+                        act = sd.size();
+                        exp = solve.size();
+                        if (!act.equals(exp)) {
+                            message += "size() " + act + "\n";
+                        }
+                        assertEquals(exp, act);
+                    }
+                    break;
+
+                    case 2: {
+                        act = sd.removeFirst();
+                        exp = solve.removeFirst();
+                        message += "removeFirst(): " + act + "\n";
+                        assertEquals(message, exp, act);
+                    }
+                    break;
+
+                    case 3: {
+                        act = sd.removeLast();
+                        exp = solve.removeLast();
+                        message += "removeLast(): " + act + "\n";
+                        assertEquals(message, exp, act);
+                    }
+                    default:
                 }
-                assertEquals(exp, act);
-
-            } else if (numberBetweenZeroAndOne >= 0.5) {
-                sd.addLast(i);
-                solve.addLast(i);
-                message += "addLast(" + i + ")\n";
-
-                actBoolean = solve.isEmpty();
-                expBoolean = solve.isEmpty();
-                if (Boolean.compare(actBoolean, expBoolean) != 0) {
-                    message += "isEmpty() " + actBoolean + "\n";
-                }
-                assertEquals(expBoolean, actBoolean);
-
-                act = sd.size();
-                exp = solve.size();
-                if (!act.equals(exp)) {
-                    message += "size() " + act + "\n";
-                }
-                assertEquals(exp, act);
-
             }
         }
-
-        for (int i = 0; i < 20; i++) {
-            numberBetweenZeroAndOne = StdRandom.uniform();
-            if (numberBetweenZeroAndOne < 0.5) {
-                act = sd.removeFirst();
-                exp = solve.removeFirst();
-                message += "removeFirst()\n";
-                assertEquals(message, exp, act);
-
-                act = sd.size();
-                exp = solve.size();
-                if (!act.equals(exp)) {
-                    message += "size() " + act + "\n";
-                }
-                assertEquals(message, exp, act);
-
-                actBoolean = solve.isEmpty();
-                expBoolean = solve.isEmpty();
-                if (Boolean.compare(actBoolean, expBoolean) != 0) {
-                    message += "isEmpty() " + actBoolean + "\n";
-                }
-                assertEquals(message, expBoolean, actBoolean);
-
-            } else if (numberBetweenZeroAndOne >= 0.5) {
-                act = sd.removeLast();
-                exp = solve.removeLast();
-                message += "removeLast()\n";
-                assertEquals(message, exp, act);
-
-                act = sd.size();
-                exp = solve.size();
-                if (!act.equals(exp)) {
-                    message += "size() " + act + "\n";
-                }
-                assertEquals(message, exp, act);
-
-                actBoolean = solve.isEmpty();
-                expBoolean = solve.isEmpty();
-                if (Boolean.compare(actBoolean, expBoolean) != 0) {
-                    message += "isEmpty() " + actBoolean + "\n";
-                }
-                assertEquals(message, expBoolean, actBoolean);
-            }
-
-        }
-
-
     }
-
 }
