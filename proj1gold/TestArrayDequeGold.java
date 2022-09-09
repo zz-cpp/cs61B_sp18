@@ -10,8 +10,8 @@ public class TestArrayDequeGold {
 
     @Test
     public void testFirst() {
-        Integer act;
-        Integer exp;
+        Integer act = 1;
+        Integer exp = 1;
         StudentArrayDeque<Integer> sd = new StudentArrayDeque();
         LinkedList<Integer> solve = new ArrayDequeSolution();
         String message = "";
@@ -21,49 +21,54 @@ public class TestArrayDequeGold {
 
         for (int i = 0; i < 1000; i++) {
             operation1 = StdRandom.uniform(0, 2);
-            randomNum = StdRandom.uniform(0, 100);
-            if (operation1 == 1) {
-                sd.addFirst(randomNum);
-                solve.addFirst(randomNum);
-                message += "addFirst(" + randomNum + ")" + "\n";
-            } else {
-                sd.addLast(randomNum);
-                solve.addLast(randomNum);
-                message += "addLast(" + randomNum + ")\n";
-            }
+            randomNum = StdRandom.uniform(0, 1000);
 
-            operation2 = StdRandom.uniform(0, 4);
-            switch (operation2) {
-                case 0: {
+            if (sd.isEmpty() && solve.isEmpty()) {
+                if (operation1 == 1) {
                     sd.addFirst(randomNum);
                     solve.addFirst(randomNum);
                     message += "addFirst(" + randomNum + ")" + "\n";
-                }
-                break;
-
-                case 1: {
+                } else {
                     sd.addLast(randomNum);
                     solve.addLast(randomNum);
                     message += "addLast(" + randomNum + ")\n";
                 }
-                break;
+            } else {
+                operation2 = StdRandom.uniform(0, 4);
+                randomNum = StdRandom.uniform(0, 1000);
+                switch (operation2) {
+                    case 0: {
+                        sd.addFirst(randomNum);
+                        solve.addFirst(randomNum);
+                        message += "addFirst(" + randomNum + ")\n";
+                    }
+                    break;
 
-                case 2: {
-                    act = sd.removeFirst();
-                    exp = solve.removeFirst();
-                    message += "removeFirst()\n";
-                    assertEquals(message, exp, act);
-                }
-                break;
+                    case 1: {
+                        sd.addLast(randomNum);
+                        solve.addLast(randomNum);
+                        message += "addLast(" + randomNum + ")\n";
+                    }
+                    break;
 
-                case 3: {
-                    act = sd.removeLast();
-                    exp = solve.removeLast();
-                    message += "removeLast()\n";
-                    assertEquals(message, exp, act);
+                    case 2: {
+                        act = sd.removeFirst();
+                        exp = solve.removeFirst();
+                        message += "removeFirst()\n";
+                    }
+                    break;
+
+                    case 3: {
+                        act = sd.removeLast();
+                        exp = solve.removeLast();
+                        message += "removeLast()\n";
+
+                    }
+                    default:
                 }
-                default:
             }
+
+            assertEquals(message, exp, act);
         }
     }
 }
