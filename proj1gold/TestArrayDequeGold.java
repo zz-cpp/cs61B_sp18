@@ -43,7 +43,7 @@ public class TestArrayDequeGold {
             } else if (numberBetweenZeroAndOne >= 0.5) {
                 sd.addLast(i);
                 solve.addLast(i);
-                message += "addLast(" + i + ")" + "\n";
+                message += "addLast(" + i + ")\n";
 
                 actBoolean = solve.isEmpty();
                 expBoolean = solve.isEmpty();
@@ -67,7 +67,7 @@ public class TestArrayDequeGold {
             if (numberBetweenZeroAndOne < 0.5) {
                 act = sd.removeFirst();
                 exp = solve.removeFirst();
-                message += "removeFirst(): " + act + "\n";
+                message += "removeFirst()\n";
                 assertEquals(message, exp, act);
 
                 act = sd.size();
@@ -87,7 +87,7 @@ public class TestArrayDequeGold {
             } else if (numberBetweenZeroAndOne >= 0.5) {
                 act = sd.removeLast();
                 exp = solve.removeLast();
-                message += "removeLast(): " + act + "\n";
+                message += "removeLast()\n";
                 assertEquals(message, exp, act);
 
                 act = sd.size();
