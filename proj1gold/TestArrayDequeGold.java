@@ -10,20 +10,19 @@ public class TestArrayDequeGold {
 
     @Test
     public void testFirst() {
-        String message = "\n";
         boolean actBoolean;
         boolean expBoolean;
         Integer act;
         Integer exp;
+        StudentArrayDeque<Integer> sd = new StudentArrayDeque();
+        LinkedList<Integer> solve = new ArrayDequeSolution();
 
         int operation1;
         int operation2;
         int randomNum;
 
         for (int j = 0; j < 1000; j++) {
-            StudentArrayDeque<Integer> sd = new StudentArrayDeque();
-            LinkedList<Integer> solve = new ArrayDequeSolution();
-
+            String message = "";
             for (int i = 0; i < 1000; i++) {
                 operation1 = StdRandom.uniform(0, 2);
                 randomNum = StdRandom.uniform(0, 100);
