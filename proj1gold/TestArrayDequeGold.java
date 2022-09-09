@@ -10,8 +10,6 @@ public class TestArrayDequeGold {
 
     @Test
     public void testFirst() {
-        boolean actBoolean;
-        boolean expBoolean;
         Integer act;
         Integer exp;
         StudentArrayDeque<Integer> sd = new StudentArrayDeque();
@@ -20,7 +18,6 @@ public class TestArrayDequeGold {
         int operation1;
         int operation2;
         int randomNum;
-
 
         for (int i = 0; i < 1000; i++) {
             operation1 = StdRandom.uniform(0, 2);
@@ -38,18 +35,16 @@ public class TestArrayDequeGold {
             operation2 = StdRandom.uniform(0, 4);
             switch (operation2) {
                 case 0: {
-                    actBoolean = sd.isEmpty();
-                    expBoolean = solve.isEmpty();
-                    message += "isEmpty() " + actBoolean + "\n";
-                    assertEquals(expBoolean, actBoolean);
+                    sd.addFirst(randomNum);
+                    solve.addFirst(randomNum);
+                    message += "addFirst(" + randomNum + ")" + "\n";
                 }
                 break;
 
                 case 1: {
-                    act = sd.size();
-                    exp = solve.size();
-                    message += "size() " + act + "\n";
-                    assertEquals(exp, act);
+                    sd.addLast(randomNum);
+                    solve.addLast(randomNum);
+                    message += "addLast(" + randomNum + ")\n";
                 }
                 break;
 
