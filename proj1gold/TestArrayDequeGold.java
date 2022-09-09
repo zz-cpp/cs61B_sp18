@@ -40,9 +40,7 @@ public class TestArrayDequeGold {
                 case 0: {
                     actBoolean = sd.isEmpty();
                     expBoolean = solve.isEmpty();
-                    if (actBoolean != expBoolean) {
-                        message += "isEmpty() " + actBoolean + "\n";
-                    }
+                    message += "isEmpty() " + actBoolean + "\n";
                     assertEquals(expBoolean, actBoolean);
                 }
                 break;
@@ -50,9 +48,7 @@ public class TestArrayDequeGold {
                 case 1: {
                     act = sd.size();
                     exp = solve.size();
-                    if (!act.equals(exp)) {
-                        message += "size() " + act + "\n";
-                    }
+                    message += "size() " + act + "\n";
                     assertEquals(exp, act);
                 }
                 break;
