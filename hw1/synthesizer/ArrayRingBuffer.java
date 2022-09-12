@@ -31,31 +31,6 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         rb = (T[]) new Object[capacity];
     }
 
-    @Override
-    public boolean isEmpty() {
-        return fillCount() == 0;
-    }
-
-    @Override
-    public boolean isFull() {
-        return fillCount() == capacity();
-    }
-
-    /**
-     * Create a new ArrayRingBuffer with the given capacity and init the rb with given value.
-     */
-    public ArrayRingBuffer(int capacity, T value) {
-        this.capacity = capacity;
-        this.first = 0;
-        this.last = 0;
-        this.fillCount = 0;
-        rb = (T[]) new Object[capacity];
-
-        for (int i = 0; i < rb.length; i++) {
-            rb[i] = value;
-        }
-    }
-
 
     /**
      * Adds x to the end of the ring buffer. If there is no room, then
@@ -102,6 +77,10 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      */
     public T peek() {
         // TODO: Return the first item. None of your instance variables should change.
+        if (fillCount() == 0) {
+            throw new RuntimeException("Ring Buffer Underflow");
+        }
+
         return rb[this.first];
     }
 

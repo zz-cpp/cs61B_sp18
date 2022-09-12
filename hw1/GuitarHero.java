@@ -1,8 +1,6 @@
 import synthesizer.*;
 
 public class GuitarHero {
-
-
     public static void main(String[] args) {
 
         GuitarString stringQ = new GuitarString(CONCERT.CONCERT_Q);
