@@ -34,23 +34,6 @@ public class PercolationStats {
         experimentNum = T;
     }
 
-    private void simulation() {
-
-        for (int i = 0; i < experimentNum; i++) {
-            StdRandom.setSeed(new Date().getTime());
-            Percolation p = this.pf.make(rowLength);
-            while (true) {
-                int x = StdRandom.uniform(rowLength);
-                int y = StdRandom.uniform(rowLength);
-                p.open(x, y);
-                if (p.percolates()) {
-                    samples[i] = p.numberOfOpenSites();
-                    break;
-                }
-            }
-        }
-    }
-
     /**
      * sample mean of percolation threshold
      * */
@@ -83,7 +66,24 @@ public class PercolationStats {
      * high endpoint of 95% confidence interval
      * */
     public double confidenceHigh() {
-        return mean - 1.96 * sqrt(stddev) / sqrt(experimentNum);
+        return mean + 1.96 * sqrt(stddev) / sqrt(experimentNum);
+    }
+
+    private void simulation() {
+
+        for (int i = 0; i < experimentNum; i++) {
+            StdRandom.setSeed(new Date().getTime());
+            Percolation p = this.pf.make(rowLength);
+            while (true) {
+                int x = StdRandom.uniform(rowLength);
+                int y = StdRandom.uniform(rowLength);
+                p.open(x, y);
+                if (p.percolates()) {
+                    samples[i] = p.numberOfOpenSites();
+                    break;
+                }
+            }
+        }
     }
 
 

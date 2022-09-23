@@ -1,7 +1,6 @@
 package hw2;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import javafx.geometry.Pos;
 
 public class Percolation {
 
@@ -17,7 +16,7 @@ public class Percolation {
 
     private int RAndC;
 
-    private static class Position {
+    private class Position {
 
         private int row;
 
