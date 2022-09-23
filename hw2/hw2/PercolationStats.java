@@ -62,7 +62,7 @@ public class PercolationStats {
      * low endpoint of 95% confidence interval
      */
     public double confidenceLow() {
-        return mean - 1.96 * sqrt(stddev) / sqrt(experimentNum);
+        return mean - 1.96 * stddev / sqrt(experimentNum);
 
     }
 
@@ -70,7 +70,7 @@ public class PercolationStats {
      * high endpoint of 95% confidence interval
      */
     public double confidenceHigh() {
-        return mean + 1.96 * sqrt(stddev) / sqrt(experimentNum);
+        return mean + 1.96 * stddev / sqrt(experimentNum);
     }
 
     private void simulation() {
