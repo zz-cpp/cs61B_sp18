@@ -12,17 +12,17 @@ import static java.lang.Math.sqrt;
 public class PercolationStats {
 
     // experiments number
-    int experimentNum;
+    private int experimentNum;
 
-    int[] samples;
+    private int[] samples;
 
-    int rowLength;
+    private int rowLength;
 
-    double mean;
+    private double mean;
 
-    double stddev;
+    private double stddev;
 
-    PercolationFactory pf;
+    private PercolationFactory pf;
 
     public PercolationStats(int N, int T, PercolationFactory pf) {
 

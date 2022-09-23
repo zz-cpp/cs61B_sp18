@@ -170,11 +170,6 @@ public class Percolation {
         return false;
     }
 
-    public static void main(String[] args) {
 
-        Percolation ptest = new Percolation(10);
-
-        System.out.println("inition ----");
-    }
 
 }
