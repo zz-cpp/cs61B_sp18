@@ -17,7 +17,7 @@ public class Percolation {
 
     private int RAndC;
 
-    static class Position {
+    private static class Position {
 
         private int row;
 

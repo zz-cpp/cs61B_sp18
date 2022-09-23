@@ -5,7 +5,6 @@ import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 
 import java.util.Date;
-import java.util.Random;
 
 import static java.lang.Math.sqrt;
 
