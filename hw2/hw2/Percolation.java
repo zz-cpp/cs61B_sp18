@@ -34,6 +34,9 @@ public class Percolation {
      * @param N is presenting N * N.
      */
     public Percolation(int N) {
+        if (N <= 0) {
+            throw new IllegalArgumentException();
+        }
 
         gridSets = new WeightedQuickUnionUF(N * N + 2);
         fake1 = N * N;
@@ -51,7 +54,7 @@ public class Percolation {
      * */
     public void open(int row, int col) {
         if (isOutIndex(row, col)) {
-            throw new IllegalArgumentException();
+            throw new IndexOutOfBoundsException();
         }
 
         if (isOpen(row, col)) {
@@ -76,7 +79,7 @@ public class Percolation {
 
     public boolean isOpen(int row, int col) {
         if (isOutIndex(row, col)) {
-            throw new IllegalArgumentException("fail: isOpen");
+            throw new IndexOutOfBoundsException("fail: isOpen");
         }
         return gridState[computeOneDimenXY(row, col)];
     }
@@ -84,7 +87,7 @@ public class Percolation {
 
     public boolean isFull(int row, int col) {
         if (isOutIndex(row, col)) {
-            throw new IllegalArgumentException(" fail: isFull");
+            throw new IndexOutOfBoundsException(" fail: isFull");
         }
 
         int position = computeOneDimenXY(row, col);
