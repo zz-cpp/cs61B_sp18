@@ -23,10 +23,11 @@ public class PercolationStats {
     private PercolationFactory pf;
 
     /**
-    * PercolationStats constructor
-    * @param N is percolation row or col length
-    * @param T is number simulation experiment
-    * */
+     * PercolationStats constructor
+     *
+     * @param N is percolation row or col length
+     * @param T is number simulation experiment
+     */
     public PercolationStats(int N, int T, PercolationFactory pf) {
 
         if (N <= 0 || T <= 0) {
@@ -45,7 +46,8 @@ public class PercolationStats {
         if (samples[0] == 0) {
             simulation();
         }
-        return this.mean = StdStats.mean(samples);
+        this.mean = StdStats.mean(samples);
+        return this.mean;
     }
 
     /**
@@ -55,7 +57,8 @@ public class PercolationStats {
         if (samples[0] == 0) {
             simulation();
         }
-        return this.stddev = StdStats.stddev(samples);
+        this.stddev = StdStats.stddev(samples);
+        return this.stddev;
     }
 
     /**
@@ -83,7 +86,7 @@ public class PercolationStats {
                 int y = StdRandom.uniform(rowLength);
                 p.open(x, y);
                 if (p.percolates()) {
-                    samples[i] =(double) p.numberOfOpenSites() / (rowLength * rowLength) ;
+                    samples[i] = (double) p.numberOfOpenSites() / (rowLength * rowLength);
                     break;
                 }
             }
