@@ -62,16 +62,16 @@ public class Percolation {
         int position = computeOneDimenXY(row, col);
 
         // if position is top or down , connect the virtual grid.
-        if (position >= 0 && position <= RAndC -1) {
-            gridSets.union(position,fake1);
+        if (position >= 0 && position <= RAndC - 1) {
+            gridSets.union(position, fake1);
         }
 
         if (position >= (RAndC - 1) * RAndC && position <= RAndC * RAndC - 1) {
-            gridSets.union(position,fake2);
+            gridSets.union(position, fake2);
         }
 
         gridState[position] = true;
-        dynamicConnect(row,col);
+        dynamicConnect(row, col);
         openSites++;
     }
 
@@ -84,20 +84,19 @@ public class Percolation {
 
 
     public boolean isFull(int row, int col) {
-        if (isOutIndex(row,col)) {
+        if (isOutIndex(row, col)) {
             throw new IllegalArgumentException(" fail: isFull");
         }
 
-        int position = computeOneDimenXY(row,col);
-        return gridSets.connected(position,fake1);
+        int position = computeOneDimenXY(row, col);
+        return gridSets.connected(position, fake1);
     }
 
     /**
-     *
      * check the system whether percolate
-     * */
+     */
     public boolean percolates() {
-        return gridSets.connected(fake1,fake2);
+        return gridSets.connected(fake1, fake2);
     }
 
     /**
@@ -132,20 +131,20 @@ public class Percolation {
             right = new Position(row, col + 1);
         }
 
-        if (top != null && isOpen(top.row,top.col)) {
-            gridSets.union(position,computeOneDimenXY(top.row,top.col));
+        if (top != null && isOpen(top.row, top.col)) {
+            gridSets.union(position, computeOneDimenXY(top.row, top.col));
         }
 
-        if (down != null && isOpen(down.row,down.col)) {
-            gridSets.union(position,computeOneDimenXY(down.row,down.col));
+        if (down != null && isOpen(down.row, down.col)) {
+            gridSets.union(position, computeOneDimenXY(down.row, down.col));
         }
 
-        if (left != null && isOpen(left.row,left.col)) {
-            gridSets.union(position,computeOneDimenXY(left.row,left.col));
+        if (left != null && isOpen(left.row, left.col)) {
+            gridSets.union(position, computeOneDimenXY(left.row, left.col));
         }
 
-        if (right != null && isOpen(right.row,right.col)) {
-            gridSets.union(position,computeOneDimenXY(right.row,right.col));
+        if (right != null && isOpen(right.row, right.col)) {
+            gridSets.union(position, computeOneDimenXY(right.row, right.col));
         }
 
 
@@ -160,7 +159,6 @@ public class Percolation {
     }
 
 
-
     private boolean isOutIndex(int row, int col) {
 
         if (row >= RAndC || row < 0 || col >= RAndC || col < 0) {
@@ -169,7 +167,6 @@ public class Percolation {
 
         return false;
     }
-
 
 
 }
