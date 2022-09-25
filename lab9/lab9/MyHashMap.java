@@ -54,24 +54,52 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        return buckets[hash(key)].get(key);
+        int index = hash(key);
+        return buckets[index].get(key);
     }
 
     /* Associates the specified value with the specified key in this map. */
     @Override
     public void put(K key, V value) {
 
-        int index = hash(key);
-        if (!buckets[index].containsKey(key)) {
-            size++;
+        if (loadFactor() > MAX_LF) {
+            resize(buckets.length * 2);
         }
-        buckets[index].put(key, value);
+
+        int index = hash(key);
+        if (!this.buckets[index].containsKey(key))
+            size++;
+
+        this.buckets[index].put(key, value);
     }
 
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
         return this.size;
+    }
+
+    /* Resize the number of  */
+    private void resize(int capacity) {
+
+        ArrayMap<K, V>[] newBuckt = new ArrayMap[capacity];
+        for (int i = 0; i < newBuckt.length; i++) {
+            newBuckt[i] = new ArrayMap<>();
+        }
+        ArrayMap<K, V>[] temp = buckets;
+        buckets = newBuckt;
+        this.size = 0;
+
+        for (int i = 0; i < temp.length; i++) {
+
+            if (temp[i].size == 0) {
+                continue;
+            }
+            Set<K> ks = temp[i].keySet();
+            for (K k : ks) {
+                put(k, temp[i].get(k));
+            }
+        }
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
