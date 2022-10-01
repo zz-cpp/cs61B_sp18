@@ -128,6 +128,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
 
         while (inBounds(index * 2)) {
             int j = index * 2;
+            // find a smaller child node
             if (j < size && min(j, j + 1) == j + 1) {
                 j++;
             }
@@ -180,9 +181,12 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     public T removeMin() {
 
         T min = contents[1].myItem;
-        // this order avoid using if-statement to verify whether the size==0 with throw IllegalArgumentException.
-        swap(1, size--);
-        sink(1);
+        // this size-- will cause the size -1 during performing swap().
+        swap(1, size);
+        size--;
+        if (size != 0) {
+            sink(1);
+        }
         contents[size + 1] = null;
         if ((size > 0) && (size == (contents.length - 1) / 4)) {
             resize(contents.length / 2);
@@ -295,7 +299,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     private void resize(int capacity) {
         Node[] temp = new ArrayHeap.Node[capacity];
-        for (int i = 1; i < this.contents.length; i++) {
+        for (int i = 1; i <= this.size; i++) {
             temp[i] = this.contents[i];
         }
         this.contents = temp;
@@ -451,46 +455,6 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             assertEquals(expected[i], pq.removeMin());
             i += 1;
         }
-    }
-
-    @Test
-    public void testIncreasingPriority() {
-        ArrayHeap<String> pq = new ArrayHeap<>();
-        pq.insert("a", 1);
-        pq.insert("b", 2);
-        pq.insert("c", 3);
-        pq.insert("d", 4);
-        pq.insert("e", 5);
-        pq.insert("f", 6);
-        pq.insert("g", 7);
-        pq.insert("i", 9);
-        pq.insert("h", 8);
-        pq.changePriority("b", 14);
-        assertEquals(9, pq.size());
-        assertEquals("a", pq.contents[1].myItem);
-        assertEquals("d", pq.contents[2].myItem);
-        assertEquals("c", pq.contents[3].myItem);
-        assertEquals("h", pq.contents[4].myItem);
-        assertEquals("e", pq.contents[5].myItem);
-        assertEquals("f", pq.contents[6].myItem);
-        assertEquals("g", pq.contents[7].myItem);
-        assertEquals("i", pq.contents[8].myItem);
-        assertEquals("b", pq.contents[9].myItem);
-
-    }
-
-    @Test
-    public void testDecreasingPriority() {
-        ArrayHeap<String> pq = new ArrayHeap<>();
-        pq.insert("a", 1);
-        pq.insert("b", 2);
-        pq.insert("c", 3);
-        pq.insert("d", 4);
-        pq.insert("e", 5);
-        pq.insert("f", 6);
-        pq.insert("g", 7);
-        pq.insert("i", 9);
-        pq.insert("h", 8);
     }
 
 }
