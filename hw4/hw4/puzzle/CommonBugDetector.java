@@ -1,5 +1,7 @@
 package hw4.puzzle;
 
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -77,11 +79,20 @@ public class CommonBugDetector {
         // s.moves() should be 5
         System.out.println("s.moves() should be 5, and your s.moves() is: " + s.moves());
 
+        StdOut.println("Minimum number of moves = " + s.moves());
+        for (WorldState ws : s.solution()) {
+            StdOut.println(ws);
+        }
+
+        System.out.println("-----------------------------------------------");
+
         AlphabetEasyPuzzle aep = new AlphabetEasyPuzzle('a');
         Solver s3 = new Solver(aep);
-        System.out.println("TODO: Print out the number of total things ever"
+        System.out.println("TODO: Print out the number of total things ever " + s3.moves()
                            + " enqueued in your MinPQ and compare to the comments.");
         // if you print out the total number of items enqueued by s3
         // it should be approximately 25, not approximately 50.
+
+
     }
 }
