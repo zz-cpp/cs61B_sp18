@@ -3,7 +3,11 @@ package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class Solver {
 
@@ -52,7 +56,7 @@ public class Solver {
         MinPQ<SearchNode> mq = new MinPQ<>(new WordComparator());
         SearchNode first = new SearchNode(initial, 0, null);
         mq.insert(first);
-        
+
         while (!mq.isEmpty()) {
 
             SearchNode popNode = mq.delMin();
@@ -74,11 +78,11 @@ public class Solver {
                 break;
             }
 
-            // first we try to use queue for critical optimal, but can't solve how enqueue and dequeue in a order.
+            // first we try to use queue for critical optimal, but can't.
             for (WorldState neighbor : popNode.state.neighbors()) {
 
                 if (popNode.previous != null && neighbor.equals(popNode.previous.state)) {
-                   continue;
+                    continue;
                 }
                 mq.insert(new SearchNode(neighbor, popNode.NumberTo + 1, popNode));
 

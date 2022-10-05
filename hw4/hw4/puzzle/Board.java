@@ -2,17 +2,13 @@ package hw4.puzzle;
 
 import edu.princeton.cs.algs4.Queue;
 
-import java.util.Arrays;
-
 public class Board implements WorldState {
 
     private int[][] state;
 
-    private int size;
-
     private final int BLANK = 0;
 
-    private int row;
+    private int N;
 
     private int hamming;
 
@@ -24,10 +20,9 @@ public class Board implements WorldState {
      */
     public Board(int[][] tiles) {
         state = new int[tiles.length][tiles.length];
-        row = this.state.length;
-        size = this.state.length * this.state.length;
-        for (int i = 0; i < row ; i++) {
-            System.arraycopy(tiles[i], 0, state[i], 0, row);
+        N = this.state.length;
+        for (int i = 0; i < N; i++) {
+            System.arraycopy(tiles[i], 0, state[i], 0, N);
         }
 
 
@@ -40,8 +35,8 @@ public class Board implements WorldState {
      * Returns value of tile at row i, column j (or 0 if blank)
      */
     public int tileAt(int i, int j) {
-        int index = i * this.row + j;
-        if (index >= row * row || index < 0) {
+        int index = i * this.N + j;
+        if (index >= N * N || index < 0) {
             throw new IndexOutOfBoundsException("tileAt failed");
         }
         return state[i][j];
@@ -52,7 +47,7 @@ public class Board implements WorldState {
      */
 
     public int size() {
-        return size;
+        return N;
     }
 
     /**
@@ -100,7 +95,7 @@ public class Board implements WorldState {
      * Compute array index
      * */
     private int computeIndex(int i, int j) {
-        return i * row + j;
+        return i * N + j;
     }
 
 
@@ -111,8 +106,8 @@ public class Board implements WorldState {
 
     public int hamming() {
         int estimate = 0;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < row; j++) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
 
                 int index = computeIndex(i, j);
                 if (state[i][j] != index + 1) {
@@ -134,15 +129,22 @@ public class Board implements WorldState {
      */
     public int manhattan() {
         int estimate = 0;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < row; j++) {
+        int tary;
+        int tarx;
+        int xoff;
+        int yoff;
+        int v;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 int index = computeIndex(i, j);
                 if (state[i][j] != index + 1) {
                     if (state[i][j] == 0)
                         continue;
-                    int tarx = state[i][j] / row;
-                    int tary = state[i][j] - tarx * row - 1;
-                    int v = (tarx + tary - i - j) < 0 ? ~(tarx + tary - i - j) + 1 : (tarx + tary - i - j);
+                    tarx = (state[i][j] - 1) / N;
+                    tary = (state[i][j] - 1) % N;
+                    xoff = (tarx - i) >= 0 ? (tarx - i) : ((~(tarx - i)) + 1);
+                    yoff = (tary - j) >= 0 ? (tary - j) : ((~(tary - j)) + 1);
+                    v = xoff + yoff;
                     estimate += v;
                 }
             }
@@ -156,19 +158,21 @@ public class Board implements WorldState {
      * simply return the results of manhattan() when submitted to Gradescope.
      */
     public int estimatedDistanceToGoal() {
+
         return this.manhattan;
     }
 
     /**
      * Returns true if this board's tile values are the same position as y's.
      */
+    @Override
     public boolean equals(Object y) {
         Board board = (Board) y;
-        if (board.size != this.size || board.manhattan() != this.manhattan || board.hamming != this.hamming) {
+        if (board.N != this.N || board.manhattan() != this.manhattan || board.hamming != this.hamming) {
             return false;
         }
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < row; j++) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 if (board.tileAt(i, j) != this.tileAt(i, j)) {
                     return false;
                 }
@@ -177,6 +181,10 @@ public class Board implements WorldState {
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
     /**
      * Returns the string representation of the board.

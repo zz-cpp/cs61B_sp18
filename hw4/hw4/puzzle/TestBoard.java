@@ -1,5 +1,7 @@
 package hw4.puzzle;
+
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class TestBoard {
@@ -27,17 +29,26 @@ public class TestBoard {
 
     @Test
     public void testHamming() {
-        int[][] titles = {{8,1,3},{4,0,2},{7,6,5}};
+        int[][] titles = {{8, 1, 3}, {4, 0, 2}, {7, 6, 5}};
         Board board = new Board(titles);
         int hamming = board.hamming();
-        assertEquals(5,hamming);
+        assertEquals(5, hamming);
     }
 
     @Test
     public void testManhattan() {
-        int[][] titles = {{8,1,3},{4,0,2},{7,6,5}};
+        int[][] titles = {{8, 1, 3}, {4, 0, 2}, {7, 6, 5}};
         Board board = new Board(titles);
         int manhattan = board.manhattan();
-        assertEquals(10,manhattan);
+        assertEquals(10, manhattan);
+
+        int[][] titles2 = {{0, 1, 3}, {4, 2, 5}, {7, 8, 6}};
+        board = new Board(titles2);
+        assertEquals(4, board.manhattan());
+
+        int[][] titles3 = {{1, 0}, {3, 2}};
+        board = new Board(titles3);
+        assertEquals(1, board.manhattan());
+
     }
 } 
