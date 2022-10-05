@@ -138,8 +138,9 @@ public class Board implements WorldState {
             for (int j = 0; j < N; j++) {
                 int index = computeIndex(i, j);
                 if (state[i][j] != index + 1) {
-                    if (state[i][j] == 0)
+                    if (state[i][j] == 0) {
                         continue;
+                    }
                     tarx = (state[i][j] - 1) / N;
                     tary = (state[i][j] - 1) % N;
                     xoff = (tarx - i) >= 0 ? (tarx - i) : ((~(tarx - i)) + 1);
@@ -167,6 +168,14 @@ public class Board implements WorldState {
      */
     @Override
     public boolean equals(Object y) {
+        if (this == y) {
+            return true;
+        }
+
+        if (y == null || y.getClass() != this.getClass()) {
+            return false;
+        }
+
         Board board = (Board) y;
         if (board.N != this.N || board.manhattan() != this.manhattan || board.hamming != this.hamming) {
             return false;

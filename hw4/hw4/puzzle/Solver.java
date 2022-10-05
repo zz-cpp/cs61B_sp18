@@ -19,7 +19,7 @@ public class Solver {
 
         private WorldState state;
 
-        private int NumberTo;
+        private int numberTo;
 
         private SearchNode previous;
 
@@ -27,7 +27,7 @@ public class Solver {
 
         private SearchNode(WorldState state, int numberTo, SearchNode previous) {
             this.state = state;
-            NumberTo = numberTo;
+            this.numberTo = numberTo;
             this.previous = previous;
             edgCache = state.estimatedDistanceToGoal();
         }
@@ -38,7 +38,7 @@ public class Solver {
 
         @Override
         public int compare(SearchNode o1, SearchNode o2) {
-            return (o1.NumberTo + o1.edgCache - (o2.NumberTo + o2.edgCache));
+            return (o1.numberTo + o1.edgCache - (o2.numberTo + o2.edgCache));
         }
     }
 
@@ -48,7 +48,7 @@ public class Solver {
      *
      * */
 
-    private void AStar(WorldState initial) {
+    private void aStar(WorldState initial) {
 
         // guarantee no duplicate state enqueue
         HashSet<WorldState> marked = new HashSet<>();
@@ -65,7 +65,7 @@ public class Solver {
                 SearchNode ref = popNode;
                 // for inversion
                 Stack<WorldState> stack = new Stack<>();
-                minmove = popNode.NumberTo;
+                minmove = popNode.numberTo;
 
                 while (ref != null) {
                     stack.push(ref.state);
@@ -84,7 +84,7 @@ public class Solver {
                 if (popNode.previous != null && neighbor.equals(popNode.previous.state)) {
                     continue;
                 }
-                mq.insert(new SearchNode(neighbor, popNode.NumberTo + 1, popNode));
+                mq.insert(new SearchNode(neighbor, popNode.numberTo + 1, popNode));
 
             }
 
@@ -103,7 +103,7 @@ public class Solver {
     public Solver(WorldState initial) {
         this.solution = new LinkedList<>();
         minmove = 0;
-        AStar(initial);
+        aStar(initial);
 
     }
 
