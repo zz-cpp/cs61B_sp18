@@ -89,12 +89,17 @@ public class MergeSort {
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
+        if (items.size() == 0) {
+            return items;
+        }
         Queue<Queue<Item>> singleItem = makeSingleItemQueues(items);
         Queue<Item> q1;
         Queue<Item> q2;
         int end = 1;
         // use queue to simulate running function stack in recursive order, amazing!!!
-        while (singleItem.size() != end) {
+        while (singleItem.size() != end ) {
+
+
             q1 = singleItem.dequeue();
             q2 = singleItem.dequeue();
             singleItem.enqueue(mergeSortedQueues(q1, q2));
@@ -105,20 +110,12 @@ public class MergeSort {
 
     public static void main(String[] args) {
         Queue<String> students = new Queue<>();
-        students.enqueue("Alice");
-        students.enqueue("Vanessa");
-        students.enqueue("Ethan");
-        students.enqueue("Bsdsas");
-        students.enqueue("Lojgug");
+
 
         students = mergeSort(students);
 
         Queue<String> answers = new Queue<>();
-        answers.enqueue("Alice");
-        answers.enqueue("Bsdsas");
-        answers.enqueue("Ethan");
-        answers.enqueue("Lojgug");
-        answers.enqueue("Vanessa");
+
 
         String stu;
         String ans;
